@@ -39,7 +39,7 @@ namespace DataAccessLibrary.Data
             {
                 foreach (var t in x)
                 {
-                    if(t.task_id == task_id)
+                    if(t.task_id.Equals(task_id))
                     {
                         return true;
                     }

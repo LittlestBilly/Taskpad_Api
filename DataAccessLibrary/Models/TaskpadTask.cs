@@ -8,7 +8,7 @@ namespace DataAccessLibrary.Models
 {
     public class TaskpadTask
     {
-        public int task_id { get; set; }
+        public Guid task_id { get; set; }
         public string task_name { get; set; }
         public string task_notes { get; set; }
     }
