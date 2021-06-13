@@ -16,17 +16,17 @@ namespace DataAccessLibrary.Data
             _db = db;
         }
 
-        public Task<List<TaskpadTask>> GetTasks()
+        public async Task<List<TaskpadTask>> GetTasks()
         {
             string sql = @"SELECT [task_id]
                           ,[task_name]
                           ,[task_notes]
                         FROM[taskpad].[dbo].[tasks]";
 
-            return _db.LoadData<TaskpadTask, dynamic>(sql, new { });
+            return await _db.LoadData<TaskpadTask, dynamic>(sql, new { });
         }
 
-        public Task<List<TaskpadTask>> GetTask(int task_id)
+        public async Task<List<TaskpadTask>> GetTask(int task_id)
         {
             string sql = @"SELECT [task_id]
                           ,[task_name]
@@ -35,14 +35,21 @@ namespace DataAccessLibrary.Data
                         WHERE task_id = @task_id";
 
 
-            return _db.LoadData<TaskpadTask, dynamic>(sql, new { task_id });
+            return await _db.LoadData<TaskpadTask, dynamic>(sql, new { task_id });
         }
 
-        
+        public async Task CreateTask(string task_name, string task_notes){
+
+            string sql =@"INSERT INTO tasks(task_name, task_notes)
+                        VALUES(@task_name, @task_notes);";
+
+            await _db.SaveData(sql, new { task_name, task_notes});
+
+        }
 
 
 
-        public Task<List<TaskpadStep>> GetSteps(int task_id)
+        public async Task<List<TaskpadStep>> GetSteps(int task_id)
         {
             string sql = @"SELECT [task_id]
                           ,[step_name]
@@ -51,7 +58,7 @@ namespace DataAccessLibrary.Data
                       FROM[taskpad].[dbo].[steps]
                       WHERE task_id = @task_id; ";
 
-            return _db.LoadData<TaskpadStep, dynamic>(sql, new { task_id });
+            return  await _db.LoadData<TaskpadStep, dynamic>(sql, new { task_id });
         }
 
         
