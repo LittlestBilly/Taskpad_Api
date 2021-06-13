@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLibrary.Data;
 
 namespace Taskpad_Api
 {
@@ -32,6 +33,8 @@ namespace Taskpad_Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Taskpad_Api", Version = "v1" });
             });
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<ITaskpadData, TaskpadData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
