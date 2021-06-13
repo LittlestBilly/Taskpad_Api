@@ -15,6 +15,40 @@ namespace DataAccessLibrary.Data
         {
             _db = db;
         }
+        public Boolean TaskExist(string task_name)
+        {
+            var x = GetTasks().Result;
+            if (x != null)
+            {
+                foreach (var t in x)
+                {
+                    if(t.task_name.ToLower().Equals(task_name.ToLower()))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+
+        }
+        public Boolean TaskExist(int task_id)
+        {
+            var x = GetTasks().Result;
+            if (x != null)
+            {
+                foreach (var t in x)
+                {
+                    if(t.task_id == task_id)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+
+        }
 
         public async Task<List<TaskpadTask>> GetTasks()
         {
@@ -38,12 +72,13 @@ namespace DataAccessLibrary.Data
             return await _db.LoadData<TaskpadTask, dynamic>(sql, new { task_id });
         }
 
-        public async Task CreateTask(string task_name, string task_notes){
+        public async Task CreateTask(string task_name, string task_notes)
+        {
 
-            string sql =@"INSERT INTO tasks(task_name, task_notes)
+            string sql = @"INSERT INTO tasks(task_name, task_notes)
                         VALUES(@task_name, @task_notes);";
 
-            await _db.SaveData(sql, new { task_name, task_notes});
+            await _db.SaveData(sql, new { task_name, task_notes });
 
         }
 
@@ -58,10 +93,10 @@ namespace DataAccessLibrary.Data
                       FROM[taskpad].[dbo].[steps]
                       WHERE task_id = @task_id; ";
 
-            return  await _db.LoadData<TaskpadStep, dynamic>(sql, new { task_id });
+            return await _db.LoadData<TaskpadStep, dynamic>(sql, new { task_id });
         }
 
-        
-        
+
+
     }
 }

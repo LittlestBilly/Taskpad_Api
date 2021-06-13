@@ -37,8 +37,9 @@ namespace Taskpad_Api.Controllers
 
         // POST api/<TaskController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(TaskpadTask task)
         {
+            _db.CreateTask(task.task_name, task.task_notes);
         }
 
         // PUT api/<TaskController>/5

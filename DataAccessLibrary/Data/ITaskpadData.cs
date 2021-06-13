@@ -10,5 +10,7 @@ namespace DataAccessLibrary.Data
         Task<List<TaskpadStep>> GetSteps(int task_id);
         Task<List<TaskpadTask>> GetTask(int task_id);
         Task<List<TaskpadTask>> GetTasks();
+        bool TaskExist(string task_name);
+        bool TaskExist(int task_id);
     }
 }
