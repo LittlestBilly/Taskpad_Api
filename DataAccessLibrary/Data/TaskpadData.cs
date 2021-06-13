@@ -34,6 +34,7 @@ namespace DataAccessLibrary.Data
                         FROM[taskpad].[dbo].[tasks]
                         WHERE task_id = @task_id";
 
+
             return _db.LoadData<TaskpadTask, dynamic>(sql, new { task_id });
         }
 

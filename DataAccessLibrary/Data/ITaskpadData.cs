@@ -7,6 +7,7 @@ namespace DataAccessLibrary.Data
     public interface ITaskpadData
     {
         Task<List<TaskpadStep>> GetSteps(int task_id);
+        Task<List<TaskpadTask>> GetTask(int task_id);
         Task<List<TaskpadTask>> GetTasks();
     }
 }
