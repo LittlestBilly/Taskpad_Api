@@ -30,7 +30,7 @@ namespace Taskpad_Api.Controllers
 
         // GET api/<TaskController>/5
         [HttpGet("{id}")]
-        public TaskpadTask Get(int id)
+        public TaskpadTask Get(Guid id)
         {
             return _db.GetTask(id).Result.FirstOrDefault();
         }
@@ -44,7 +44,7 @@ namespace Taskpad_Api.Controllers
 
         // PUT api/<TaskController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(Guid id, [FromBody] string value)
         {
         }
 

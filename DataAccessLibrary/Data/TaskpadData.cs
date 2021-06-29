@@ -32,7 +32,7 @@ namespace DataAccessLibrary.Data
             return false;
 
         }
-        public Boolean TaskExist(int task_id)
+        public Boolean TaskExist(Guid task_id)
         {
             var x = GetTasks().Result;
             if (x != null)
@@ -60,7 +60,7 @@ namespace DataAccessLibrary.Data
             return await _db.LoadData<TaskpadTask, dynamic>(sql, new { });
         }
 
-        public async Task<List<TaskpadTask>> GetTask(int task_id)
+        public async Task<List<TaskpadTask>> GetTask(Guid task_id)
         {
             string sql = @"SELECT [task_id]
                           ,[task_name]
@@ -84,7 +84,7 @@ namespace DataAccessLibrary.Data
 
 
 
-        public async Task<List<TaskpadStep>> GetSteps(int task_id)
+        public async Task<List<TaskpadStep>> GetSteps(Guid task_id)
         {
             string sql = @"SELECT [task_id]
                           ,[step_name]
@@ -96,7 +96,9 @@ namespace DataAccessLibrary.Data
             return await _db.LoadData<TaskpadStep, dynamic>(sql, new { task_id });
         }
 
-
-
+        public bool TaskExist(int task_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
